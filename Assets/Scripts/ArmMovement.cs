@@ -5,7 +5,7 @@ using System.Collections;
 //ASSUME RIGHT HAND USAGE
 public class ArmMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
 
 
     void Awake()
@@ -14,10 +14,10 @@ public class ArmMovement : MonoBehaviour
     }
 
     void Update()
-    {
+    {//fjaskdn
         Vector2 mPos = Input.mousePosition;
-        Vector2 direction = mPos - rb.position;
+        Vector2 direction = new Vector2(mPos.x-rb.position.x,mPos.y-rb.position.y);
         Debug.Log(direction.x + " " + direction.y);
-        rb.AddForceAtPosition(direction.normalized, mPos);
+        rb.AddForce(direction.normalized);
     }
 }
