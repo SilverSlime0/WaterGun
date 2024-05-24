@@ -8,6 +8,9 @@ public class Launcher : MonoBehaviour
 {
     Rigidbody2D rb;
     public float thrust = 10f;
+    
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,7 +23,7 @@ public class Launcher : MonoBehaviour
 
     }
     private void leftClick(){
-        rb.AddForce(transform.up * thrust, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(Mathf.cos(rb.rotation * Mathf.PI / 180), Mathf.Sin(rb.rotation*Mathf.PI/180)) * thrust, ForceMode2D.Impulse);//TRYING DIRECTION STUFF
         Debug.Log("Guh?");
     }
 }
