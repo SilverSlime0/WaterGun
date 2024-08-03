@@ -6,24 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class Launcher : MonoBehaviour
 {
-    Rigidbody2D rb;
-    public float thrust = 10f;
-    
-
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    public float forceS = 10f;
 
     void Update()
     {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
+        Vector3 direction = mousePos - transform.position;
+        transform.up = direction.normalized;
         if (Input.GetMouseButtonDown(0))
-            leftClick();
-
-    }
-    private void leftClick(){
-        rb.AddForce(new Vector2(Mathf.cos(rb.rotation * Mathf.PI / 180), Mathf.Sin(rb.rotation*Mathf.PI/180)) * thrust, ForceMode2D.Impulse);//TRYING DIRECTION STUFF
-        Debug.Log("Guh?");
+        {
+            GetComponent<Rigidbody2D>().AddForce(-transform.up * forceS, ForceMode2D.Impulse);
+        }
     }
 }
